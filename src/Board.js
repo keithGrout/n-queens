@@ -90,7 +90,6 @@
 
     // test if any rows on this board contain conflicts
     hasAnyRowConflicts: function() {
-<<<<<<< HEAD
       var boardLength = this.attributes[0].length;
       var foundCount = 0;
 
@@ -106,7 +105,6 @@
         }
       }
       return false;
-=======
       var board = this.attributes;
 
       // iterate through all rows of board, searching for 1;
@@ -123,7 +121,6 @@
       }
 
       return false; // fixme
->>>>>>> 0150d6ebd94d299210ceac40a6cdc727eb3dff9a
     },
 
 
@@ -144,7 +141,6 @@
 
     // test if any columns on this board contain conflicts
     hasAnyColConflicts: function() {
-<<<<<<< HEAD
       var boardLength = this.attributes[0].length;
       var foundCount = 0;
 
@@ -159,7 +155,6 @@
             }
         }
       } 
-=======
       var board = this.attributes;
 
       // iterate through all rows of board, searching for 1;
@@ -173,7 +168,6 @@
         }
       }
 
->>>>>>> 0150d6ebd94d299210ceac40a6cdc727eb3dff9a
       return false; // fixme
     },
 
@@ -209,7 +203,6 @@
 
     // test if any major diagonals on this board contain conflicts
     hasAnyMajorDiagonalConflicts: function() {
-<<<<<<< HEAD
      var found = 0;
       var boardLength = this.attributes[0].length;;
       for(var row = 0; row < boardLength; row++){
@@ -227,7 +220,6 @@
 
 
       return false; // fixme
-=======
       var board = this.attributes;
 
       var row = board['n']-2;
@@ -273,7 +265,6 @@
 
       }
 
->>>>>>> 0150d6ebd94d299210ceac40a6cdc727eb3dff9a
     },
 
 
