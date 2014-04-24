@@ -18,7 +18,7 @@ describe("Board", function() {
       });
     });
   };
-
+/*
   describe("Empty board", function() {
     verifyConflictTypes([''], [
       [0, 0, 0, 0],
@@ -44,7 +44,7 @@ describe("Board", function() {
       [1, 0, 0, 0],
       [0, 0, 0, 0]
     ]);
-  });
+  });*/
 
   describe("Board with major diagonal conflicts", function() {
     verifyConflictTypes(['majorDiagonal', 'queens'], [
