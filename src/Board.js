@@ -90,6 +90,7 @@
 
     // test if any rows on this board contain conflicts
     hasAnyRowConflicts: function() {
+<<<<<<< HEAD
       var boardLength = this.attributes[0].length;
       var foundCount = 0;
 
@@ -105,6 +106,24 @@
         }
       }
       return false;
+=======
+      var board = this.attributes;
+
+      // iterate through all rows of board, searching for 1;
+      for(var row in board){
+        var found = 0;
+        for(var column = 0; column < board['n']; column++){
+          if(board[row][column] === 1){
+            found++;
+            if(found > 1){
+              return true;
+            }
+          }
+        }
+      }
+
+      return false; // fixme
+>>>>>>> 0150d6ebd94d299210ceac40a6cdc727eb3dff9a
     },
 
 
@@ -125,6 +144,7 @@
 
     // test if any columns on this board contain conflicts
     hasAnyColConflicts: function() {
+<<<<<<< HEAD
       var boardLength = this.attributes[0].length;
       var foundCount = 0;
 
@@ -139,6 +159,21 @@
             }
         }
       } 
+=======
+      var board = this.attributes;
+
+      // iterate through all rows of board, searching for 1;
+      for (var row = 0 ; row < board['n'] ; row++) {
+        var found = 0;
+        for (var column in board) {
+          if (board[column][row] === 1) {
+            found++;
+            if (found > 1) { return true; }
+          }
+        }
+      }
+
+>>>>>>> 0150d6ebd94d299210ceac40a6cdc727eb3dff9a
       return false; // fixme
     },
 
@@ -174,6 +209,7 @@
 
     // test if any major diagonals on this board contain conflicts
     hasAnyMajorDiagonalConflicts: function() {
+<<<<<<< HEAD
      var found = 0;
       var boardLength = this.attributes[0].length;;
       for(var row = 0; row < boardLength; row++){
@@ -191,6 +227,53 @@
 
 
       return false; // fixme
+=======
+      var board = this.attributes;
+
+      var row = board['n']-2;
+      var column = 0;
+      var counter = 0;
+      var startingPoint = row;
+
+      while (true) {
+
+        while ( row < board['n'] ) {
+          console.log(row, column);
+          if (board[row][column] === 1) { counter ++; }
+          if (counter > 1) { return true; }
+          column++;
+          row++;
+
+        }
+        counter = 0;
+        startingPoint--;
+        row = startingPoint;  // row -1 column = 0;
+        column = 0;
+
+        if(startingPoint < 0) {
+          startingPoint = 1;
+          row = 0;
+          column = startingPoint;
+
+          while(startingPoint < board['n']){
+            column = startingPoint;
+            while (column < board['n']) {
+              if (board[row][column] === 1) { counter ++; }
+              if (counter > 1) { return true; }
+              column++;
+              row++;
+            }
+            counter  = 0;
+            row = 0;
+            startingPoint++;
+          }
+          return false;
+        }
+
+
+      }
+
+>>>>>>> 0150d6ebd94d299210ceac40a6cdc727eb3dff9a
     },
 
 
@@ -205,7 +288,51 @@
 
     // test if any minor diagonals on this board contain conflicts
     hasAnyMinorDiagonalConflicts: function() {
-      return false; // fixme
+      var board = this.attributes;
+
+      var row = board['n']-2;
+      var column = 0;
+      var counter = 0;
+      var startingPoint = row;
+
+      while (true) {
+
+        while ( row < board['n'] ) {
+          console.log(row, column);
+          if (board[row][column] === 1) { counter ++; }
+          if (counter > 1) { return true; }
+          column++;
+          row++;
+
+        }
+        counter = 0;
+        startingPoint--;
+        row = startingPoint;  // row -1 column = 0;
+        column = 0;
+
+        if(startingPoint < 0) {
+          startingPoint = 1;
+          row = 0;
+          column = startingPoint;
+
+          while(startingPoint < board['n']){
+            column = startingPoint;
+            while (column < board['n']) {
+              if (board[row][column] === 1) { counter ++; }
+              if (counter > 1) { return true; }
+              column++;
+              row++;
+            }
+            counter  = 0;
+            row = 0;
+            startingPoint++;
+          }
+          return false;
+        }
+
+
+      }
+
     }
 
     /*--------------------  End of Helper Functions  ---------------------*/
