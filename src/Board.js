@@ -172,98 +172,56 @@
     },
 
 
-
     // Major Diagonals - go from top-left to bottom-right
     // --------------------------------------------------------------
     //
     // test if a specific major diagonal on this board contains a conflict
     hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow) {
-      // maorDiagonal is going to start at this.attributes[0][0]
-      // 2nd diag will be [1][1]
-      // 3rd diag will be [2][2]
-      // 4th diag will be [3][3]
-      var found = 0;
-      var boardLength = this.attributes[0].length;
-      for(var row = 0; row < boardLength; row++){
-        for(column = 0; column < boardLength; column++){
-          if(row === column){
-            if(this.attributes[row][column]){
-              found++;
-            }
-            if(found > 1){
-              return true;
-            }
+      var boardSize = this.attributes[0].length;
+      // the index passed in relates to the column index at the first row
+      // we can extend the rows backwards to boardSize.length[-1]
+      var count = 0; 
+      var row = 0;
+      var column = 0;
+
+      if(majorDiagonalColumnIndexAtFirstRow < 0){
+        row = majorDiagonalColumnIndexAtFirstRow * -1;
+        while(row < boardSize){
+          if(this.attributes[row][column] === 1){
+            count++;
+            if(count === 2) return true;
           }
+          row++;
+          column++;
         }
-      }
-
-
-      return false; // fixme
+      }else{
+        column = majorDiagonalColumnIndexAtFirstRow;
+        while(row < boardSize){
+          if(this.attributes[row][column] === 1){
+            count++;
+            if(count === 2) return true;
+          }
+          column++;
+          row++
+        }
+      } 
+      return false;
     },
 
     // test if any major diagonals on this board contain conflicts
     hasAnyMajorDiagonalConflicts: function() {
-     var found = 0;
-      var boardLength = this.attributes[0].length;;
-      for(var row = 0; row < boardLength; row++){
-        for(column = 0; column < boardLength; column++){
-          if(row === column){
-            if(this.attributes[row][column]){
-              found++;
-            }
-            if(found > 1){
-              return true;
-            }
-          }
+      var boardSize = this.attributes[0].length;
+
+      for(var i = 0; i < boardSize; i++){
+        if(this.hasMajorDiagonalConflictAt(i)){
+          return true;
+        }
+        if(this.hasMajorDiagonalConflictAt(i * -1)){
+          return true;
         }
       }
+      return false;
 
-
-      return false; // fixme
-      var board = this.attributes;
-
-      var row = board['n']-2;
-      var column = 0;
-      var counter = 0;
-      var startingPoint = row;
-
-      while (true) {
-
-        while ( row < board['n'] ) {
-          console.log(row, column);
-          if (board[row][column] === 1) { counter ++; }
-          if (counter > 1) { return true; }
-          column++;
-          row++;
-
-        }
-        counter = 0;
-        startingPoint--;
-        row = startingPoint;  // row -1 column = 0;
-        column = 0;
-
-        if(startingPoint < 0) {
-          startingPoint = 1;
-          row = 0;
-          column = startingPoint;
-
-          while(startingPoint < board['n']){
-            column = startingPoint;
-            while (column < board['n']) {
-              if (board[row][column] === 1) { counter ++; }
-              if (counter > 1) { return true; }
-              column++;
-              row++;
-            }
-            counter  = 0;
-            row = 0;
-            startingPoint++;
-          }
-          return false;
-        }
-
-
-      }
 
     },
 
@@ -274,55 +232,48 @@
     //
     // test if a specific minor diagonal on this board contains a conflict
     hasMinorDiagonalConflictAt: function(minorDiagonalColumnIndexAtFirstRow) {
-      return false; // fixme
+      var boardSize = this.attributes[0].length;
+      var count = 0; 
+      var row = 0;
+      var column = 0;
+
+      if(minorDiagonalColumnIndexAtFirstRow >= this.attributes[0].length){
+        row = minorDiagonalColumnIndexAtFirstRow;
+        while(row < boardSize){
+          if(this.attributes[row][column] === 1){
+            count++;
+            if(count === 2) return true;
+          }
+          row++;
+          column--;
+        }
+      }else{
+        column = minorDiagonalColumnIndexAtFirstRow;
+        while(row < boardSize){
+          if(this.attributes[row][column] === 1){
+            count++;
+            if(count === 2) return true;
+          }
+          row++;
+          column--;
+        }
+      } 
+      return false;
     },
 
     // test if any minor diagonals on this board contain conflicts
     hasAnyMinorDiagonalConflicts: function() {
-      var board = this.attributes;
+      var boardSize = this.attributes[0].length;
 
-      var row = board['n']-2;
-      var column = 0;
-      var counter = 0;
-      var startingPoint = row;
-
-      while (true) {
-
-        while ( row < board['n'] ) {
-          console.log(row, column);
-          if (board[row][column] === 1) { counter ++; }
-          if (counter > 1) { return true; }
-          column++;
-          row++;
-
+      for(var i = 0; i < boardSize; i++){
+        if(this.hasMinorDiagonalConflictAt(i)){
+          return true;
         }
-        counter = 0;
-        startingPoint--;
-        row = startingPoint;  // row -1 column = 0;
-        column = 0;
-
-        if(startingPoint < 0) {
-          startingPoint = 1;
-          row = 0;
-          column = startingPoint;
-
-          while(startingPoint < board['n']){
-            column = startingPoint;
-            while (column < board['n']) {
-              if (board[row][column] === 1) { counter ++; }
-              if (counter > 1) { return true; }
-              column++;
-              row++;
-            }
-            counter  = 0;
-            row = 0;
-            startingPoint++;
-          }
-          return false;
+        if(this.hasMinorDiagonalConflictAt( (boardSize - 1) + i) ){
+          return true;
         }
-
-
       }
+      return false;
 
     }
 
